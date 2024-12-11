@@ -1,0 +1,59 @@
+<p>reactive-form works!</p>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Name">
+        </div>
+        <div class="col-md-3">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" formControlName="age" placeholder="Enter Age">
+        </div>
+        <div class="col-md-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" formControlName="email" placeholder="Enter Email Address">
+        </div>
+        <div class="col-md-3">
+            <label for="post">Select Post</label>
+            <ng-select [items]="posts" bindLabel="title" bindValue="id" placeholder="Select Post"
+                formControlName="post">
+            </ng-select>
+        </div>
+    </div>
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container formArrayName="product">
+                <ng-container *ngFor="let item of  product.controls let i = index let first = first let last = last">
+                    <ng-container [formGroupName]="i">
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" formControlName="name">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="price">
+                            </td>
+                            <td>
+                                <button *ngIf="last" (click)="addProduct()" type="button"
+                                    class="btn btn-success ms-2">Add</button>
+                                <button (click)="removeProduct(i)" type="button"
+                                    class="btn btn-danger ms-2">Remove</button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="row mt-2">
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>

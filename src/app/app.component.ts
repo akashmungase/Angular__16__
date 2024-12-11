@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+
+  AgeList = [
+    {key: '12', value: 12},
+    {key: '44', value: 44},
+  ]
 }
